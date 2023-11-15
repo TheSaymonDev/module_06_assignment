@@ -36,6 +36,11 @@ class HomePage extends StatelessWidget {
     },
   ];
 
+  mySnackBarMessage(String message, BuildContext context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +60,16 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 16),
             ),
+            SizedBox(
+              height: 10,
+            ),
             TextField(
               decoration: InputDecoration(
                   hintText: 'Search for photos..',
                   border: OutlineInputBorder()),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Container(
               height: MediaQuery.of(context).size.height * .30,
@@ -85,6 +96,9 @@ class HomePage extends StatelessWidget {
                 itemCount: myList.length,
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.separated(
                   itemBuilder: (context, index) => ListTile(
@@ -105,7 +119,13 @@ class HomePage extends StatelessWidget {
                   separatorBuilder: (context, index) => SizedBox(
                         height: 10,
                       ),
-                  itemCount: myList.length-3),
+                  itemCount: myList.length - 3),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                mySnackBarMessage('photo updated successfully', context);
+              },
+              child: Icon(Icons.upload),
             )
           ],
         ),
